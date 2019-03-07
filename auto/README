@@ -1,0 +1,36 @@
+ex1 -
+
+A call to .find(), .begin(), or .end() on an object of type T, where
+the result of the call is an object of type T::iterator or
+T::const_iterator, probably shouldn't be spelling out the name of the
+iterator. Use auto instead.
+
+ex2 -
+
+A call to make_unique (or WrapUnique) doesn't need to spell the type
+twice in the sample expression.
+
+ex3 -
+
+When using a range-based loop on a container where the element type is
+spelled out within a few lines (maybe 5 lines?) then use auto.
+
+ex4 -
+
+When using a range-based loop on a container where the type is hidden,
+don't. (Note the use of CTAD, this example assumes C++17.)
+
+ex5 -
+
+When using a range-based loop on any container where the element type
+is std::pair<const T1, T2>, and the body of the loop refers to the
+.first and/or .second element of the pair, rewrite if possible.
+
+This requires key and value to be unused names in this scope.
+
+ex6 -
+
+Dont' do the ex5 rewrite if the loop is in terms of a mutable pair<T1,
+T2> and T1 is being modified.
+
+(This requires a copy of the elements in the loop.)

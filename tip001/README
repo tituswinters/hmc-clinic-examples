@@ -1,0 +1,24 @@
+ex1 -
+
+If the only usage of a const string ref in a function body is to pass to
+things that accept string_view, change to string_view.
+
+ex2 -
+
+If the only usage of a const string ref in a function body is to pass
+to an overload set, one element of which is string_view, change to
+string_view.
+
+(In theory this could be a behavioral change if f(string) is different
+than f(string_view ... but that would be horrible design in the first
+place.)
+
+ex3 -
+
+If one or more of the usages of a const string ref in a function body
+is passed to a thing that accepts only const string ref, don't change
+anything.
+
+(Changing g to accept string_view would require an extra copy of the
+data to call bad_f()).
+
